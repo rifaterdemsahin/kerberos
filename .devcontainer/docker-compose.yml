@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+  kdc:
+    build: ./kdc
+    hostname: kdc.example.com
+    container_name: kdc
+    networks:
+      default:
+        aliases:
+          - kdc.example.com
+    ports:
+      - "88:88"
+      - "464:464"
+    volumes:
+      - shared:/shared
+
+  client:
+    build: ./client
+    hostname: client.example.com
+    container_name: client
+    depends_on:
+      - kdc
+    networks:
+      default:
+        aliases:
+          - client.example.com
+    ports:
+      - "8000:8000"
+    environment:
+      - KRB5_KTNAME=FILE:/shared/client.keytab
+    volumes:
+      - shared:/shared
+
+volumes:
+  shared:

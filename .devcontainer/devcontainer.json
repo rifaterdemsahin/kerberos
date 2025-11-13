@@ -1,0 +1,1 @@
+{"name": "Kerberos Demo","dockerComposeFile": "docker-compose.yml","service": "client","workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}","runServices": ["kdc","client"],"forwardPorts": [8000,88,464],"portsAttributes": {"8000": {"label": "GSSAPI demo server"},"88": {"label": "Kerberos KDC (TCP)"},"464": {"label": "Kerberos kadmin (TCP)"}}}
